@@ -19,7 +19,7 @@ file_name_training_program = f"training_{timestamp}.txt"
 with open("programs.json", "r", encoding="utf-8") as f:
     programs = json.load(f)
 
-choosing_training_program = safe_int_input("Выберите гоовую программу тренировок или создайте свою(введите '1' для создания своей программы или '2' для выбора готовой) ")
+choosing_training_program = safe_int_input("Выберите готовую программу тренировок или создайте свою(введите '1' для создания своей программы или '2' для выбора готовой) ")
 while choosing_training_program != 1 and choosing_training_program != 2:
     print("Введите '1' или '2'")
     choosing_training_program = safe_int_input("Выберите гоовую программу тренировок или создайте свою(введите '1' для создания своей программы или '2' для выбора готовой) ")
