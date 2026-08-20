@@ -1,4 +1,5 @@
 import json
+import sys
 from datetime import datetime
 import os
 
@@ -48,26 +49,23 @@ if choosing_training_program == 2:
 
     choice = input("Выберите номер программы (или 'нет' для выхода): ")
 
-    if choice == "нет":
-        print("До встречи!")
-    elif choice not in programs:
-        while choice not in programs:
-            print("Неправильный номер программы. Попробуйте еще раз.")
-            choice = input("Выберите номер программы (или 'нет' для выхода): ")
-    else:
-        selected_program = programs[choice]
-        print(f"\nВы выбрали программу: {selected_program['name']}")
+    while choice not in programs:
+        if choice == "нет":
+            print("До встречи!")
+            sys.exit(0)
+        print("Неправильный номер программы. Попробуйте еще раз.")
+        choice = input("Выберите номер программы (или 'нет' для выхода): ")
 
-        with open (file_name_training_program, "a", encoding="utf-8") as file:
-            file.write(f"--- {selected_program['name']} ---\n")
+    selected_program = programs[choice]
+    print(f"\nВы выбрали программу: {selected_program['name']}")
 
-            for exercise in selected_program['exercises']:
-                print(f"\n Упражнение: {exercise}")
-                weight = safe_int_input("  Введите рабочий вес (кг): ")
-                approaches = safe_int_input("  Введите количество подходов: ")
-                repetitions = safe_int_input("  Введите количество повторений: ")
-
-                file.write(f"{exercise} - {weight}кг, {approaches} на {repetitions}\n")
-                print(f"{exercise} сохранено!")
-
-        print("Тренировка сохранена!")
+    with open (file_name_training_program, "a", encoding="utf-8") as file:
+        file.write(f"--- {selected_program['name']} ---\n")
+        for exercise in selected_program['exercises']:
+            print(f"\n Упражнение: {exercise}")
+            weight = safe_int_input("  Введите рабочий вес (кг): ")
+            approaches = safe_int_input("  Введите количество подходов: ")
+            repetitions = safe_int_input("  Введите количество повторений: ")
+            file.write(f"{exercise} - {weight}кг, {approaches} на {repetitions}\n")
+            print(f"{exercise} сохранено!")
+    print("Тренировка сохранена!")
